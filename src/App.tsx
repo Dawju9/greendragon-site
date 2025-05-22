@@ -11,7 +11,7 @@ interface ServerInfo {
   map: string
 }
 
-function App() {
+export default function App() {
   const [serverInfo, setServerInfo] = useState<ServerInfo | null>(null)
   const [walletConnected, setWalletConnected] = useState(() => {
     const saved = localStorage.getItem('walletConnected')
@@ -21,8 +21,6 @@ function App() {
     const saved = localStorage.getItem('balance')
     return saved ? parseFloat(saved) : 1.0
   })
-  const [message, setMessage] = useState('')
-  const [isScratching, setIsScratching] = useState(false)
 
   useEffect(() => {
     fetch('http://198.244.231.52:30322/info')
@@ -159,7 +157,6 @@ function App() {
     scratchCardContainer.addEventListener('scratchcard:complete', (event: Event) => {
       const customEvent = event as CustomEvent
       setBalance(prev => prev + customEvent.detail.totalWinnings)
-      setIsScratching(false)
       setTimeout(() => {
         scratchCard.reset()
       }, 2000)
@@ -172,7 +169,6 @@ function App() {
 
   const connectWallet = () => {
     setWalletConnected(true)
-    setMessage('Wallet connected!')
   }
 
   return (
