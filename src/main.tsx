@@ -19,11 +19,13 @@ export interface ScratchCardOptions {
 
 export class ScratchCard {
   canvas: HTMLCanvasElement
+  private options: ScratchCardOptions
   
   constructor(selector: string, options: ScratchCardOptions) {
     this.canvas = document.createElement('canvas')
     this.canvas.id = selector.substring(1)
     document.body.appendChild(this.canvas)
+    this.options = options
   }
 
   init() {
