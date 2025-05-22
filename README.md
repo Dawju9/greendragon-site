@@ -1,21 +1,51 @@
-# React + TypeScript + Vite
+# Scratch Cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple scratch card implementation using React, TypeScript, and Vite.
 
-While this project uses React, Vite supports many popular JS frameworks. [See all the supported frameworks](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+## Features
 
-## Deploy Your Own
+- Interactive scratch card functionality
+- Customizable card designs
+- Reveal hidden content with mouse/touch gestures
 
-Deploy your own Vite project with Vercel.
+## Getting Started
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/vite-react&template=vite-react)
-
-_Live Example: https://vite-react-example.vercel.app_
-
-### Deploying From Your Terminal
-
-You can deploy your new Vite project with a single command from your terminal using [Vercel CLI](https://vercel.com/download):
-
+1. Clone the repository
+2. Install dependencies:
 ```shell
-$ vercel
+npm install
 ```
+
+3. Run the development server:
+```shell
+npm run dev
+```
+
+## Usage
+
+Import the ScratchCard component and use it in your React application:
+
+```typescript
+import { ScratchCard } from './components/ScratchCard';
+
+function App() {
+  return (
+    <ScratchCard 
+      coverImage="path/to/cover.png"
+      hiddenContent="Congratulations!"
+    />
+  );
+}
+```
+
+## Configuration
+
+You can customize the scratch card with these props:
+- `coverImage`: Image shown before scratching
+- `hiddenContent`: Content revealed after scratching
+- `brushSize`: Size of the scratch area
+- `completion`: Percentage required to fully reveal
+
+## License
+
+MIT License
