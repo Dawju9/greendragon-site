@@ -80,7 +80,7 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <title>New Crypto Scratch</title>
+        <title>Cash2Go New Crypto Scratches</title>
         <div className="logo-container">
           <a href="https://vitejs.dev" target="_blank">
             <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -89,7 +89,7 @@ export default function App() {
       </header>
       <main className="main-content">
         <section className="server-info-section">
-          <h1 className="section-title">Fivem Server Info</h1>
+          <h1 className="section-title">Cash2Go Profile</h1>
           <div className="card server-info-card">
             {serverInfo ? (
               <ul className="server-info-list">
@@ -107,10 +107,12 @@ export default function App() {
         </section>
         <section className="crypto-section">
           <div className="card crypto-card">
-            <h1 className="section-title">Crypto Scratch Card</h1>
+            <h1 className="section-title">Cash2Go New Crypto Scratches Cards</h1>
+
+
             {!walletConnected ? (
               <button className="connect-wallet" onClick={connectWallet}>Connect Wallet</button>
-            ) : null}
+            ) : null }
           </div>
         </section>
       </main>
