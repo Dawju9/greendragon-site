@@ -27,6 +27,14 @@
   }
 }
 
+@keyframes scratch-effect {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -48,6 +56,11 @@ body {
   width: 90%;
   max-width: 400px;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:active {
+  animation: scratch-effect 0.2s ease-in-out;
 }
 
 .read-the-docs {
@@ -63,9 +76,42 @@ button {
   color: white;
   cursor: pointer;
   margin-top: 1rem;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  animation: scratch-effect 0.2s ease-in-out;
 }
 
 button:disabled {
   background-color: #444;
   cursor: not-allowed;
+  animation: none;
+  transform: none;
+}
+
+.scratch-interaction {
+  position: relative;
+  overflow: hidden;
+}
+
+.scratch-interaction::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.scratch-interaction:active::after {
+  opacity: 1;
 }
