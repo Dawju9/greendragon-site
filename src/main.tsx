@@ -49,7 +49,7 @@ const initScratchCards = () => {
     })
 
     scratchCard.init().then(() => {
-      scratchCard.canvas.addEventListener('scratch', (event: MouseEvent) => {
+      scratchCard.canvas.addEventListener('mousemove', (event: MouseEvent) => {
         // Handle scratch events
         const scratch = document.createElement('div')
         scratch.className = 'scratch-effect'
@@ -62,8 +62,7 @@ const initScratchCards = () => {
       })
     })
   }
-}
-initScratchCards()
+}initScratchCards()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

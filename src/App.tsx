@@ -17,10 +17,10 @@ export default function App() {
     const saved = localStorage.getItem('walletConnected')
     return saved ? JSON.parse(saved) : false
   })
-  const [balance, setBalance] = useState(() => {
+  const balance = useState(() => {
     const saved = localStorage.getItem('balance')
     return saved ? parseFloat(saved) : 1.0
-  })
+  })[0]
 
   useEffect(() => {
     fetch('http://198.244.231.52:30322/info')
