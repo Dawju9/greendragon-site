@@ -1,40 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './App.css'
+import { Scratchcard } from './components/scratchcard'
 
-export interface ScratchCardOptions {
-  scratchType: string
-  containerWidth: number
-  containerHeight: number
-  imageForwardSrc: string
-  imageBackgroundSrc: string
-  htmlBackground: string
-  brushSrc: string
-  radius: number
-  nPoints: number
-  percent: number
-  onComplete: () => void
+export default function App() {
 }
 
-export class ScratchCard {
-  canvas: HTMLCanvasElement
-  options: ScratchCardOptions // Add the options property here
-  
-  constructor(selector: string, options: ScratchCardOptions) {
-    this.canvas = document.createElement('canvas')
-    this.canvas.id = selector.substring(1)
-    document.body.appendChild(this.canvas)
-    this.options = options
-  }
-
-  init() {
-    return Promise.resolve()
-  }
-}
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <Scratchcard width={undefined} height={undefined} image={undefined} finishPercent={undefined} onComplete={undefined} children={undefined} />
+  </React.StrictMode>
 )
