@@ -11,14 +11,41 @@ interface ServerInfo {
   map: string
 }
 
+const prizes = ['0.01 ETH', '0.05 ETH', '0.1 ETH', 'Try Again', '0.5 ETH']
+
 function App() {
   const [serverInfo, setServerInfo] = useState<ServerInfo | null>(null)
+  const [walletConnected, setWalletConnected] = useState(false)
+  const [balance, setBalance] = useState(1.0)
+  const [message, setMessage] = useState('')
+  const [isScratching, setIsScratching] = useState(false)
 
   useEffect(() => {
     fetch('http://198.244.231.52:30322/info')
       .then((res) => res.json())
       .then((data) => setServerInfo(data))
   }, [])
+
+  const connectWallet = () => {
+    setWalletConnected(true)
+    setMessage('Wallet connected!')
+  }
+
+  const buyScratchCard = () => {
+    if (balance < 0.1) {
+      setMessage('Insufficient balance!')
+      return
+    }
+
+    setIsScratching(true)
+    setBalance((prev) => parseFloat((prev - 0.1).toFixed(2)))
+
+    setTimeout(() => {
+      const result = prizes[Math.floor(Math.random() * prizes.length)]
+      setMessage(`You won: ${result}`)
+      setIsScratching(false)
+    }, 1000)
+  }
 
   return (
     <>
@@ -43,9 +70,22 @@ function App() {
           <p>Loading...</p>
         )}
       </div>
+      <div className="card">
+        <h1>Crypto Scratch Card</h1>
+        {!walletConnected ? (
+          <button onClick={connectWallet}>Connect Wallet</button>
+        ) : (
+          <>
+            <p>Balance: {balance.toFixed(2)} ETH</p>
+            <button onClick={buyScratchCard} disabled={isScratching}>
+              {isScratching ? 'Scratching...' : 'Buy Scratch Card (0.1 ETH)'}
+            </button>
+            <p>{message}</p>
+          </>
+        )}
+      </div>
     </>
   )
 }
 
 export default App
-
