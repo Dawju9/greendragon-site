@@ -1,8 +1,22 @@
 import React from 'react';
 
-export const Scratchcard = ({ width, height, image, finishPercent, onComplete, children }) => {
+export const ScratchCard = ({
+  width,
+  height,
+  image,
+  finishPercent,
+  onComplete,
+  children,
+}: {
+  width: number;
+  height: number;
+  image: string;
+  finishPercent: number;
+  onComplete: () => void;
+  children: React.ReactNode;
+}) => {
   return (
-    <div style={{ width, height }}>
+    <div style={{ width, height, backgroundImage: `url(${image})` }}>
       {children}
     </div>
   );
