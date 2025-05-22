@@ -19,7 +19,7 @@ export interface ScratchCardOptions {
 
 export class ScratchCard {
   canvas: HTMLCanvasElement
-  private options: ScratchCardOptions
+  options: ScratchCardOptions // Add the options property here
   
   constructor(selector: string, options: ScratchCardOptions) {
     this.canvas = document.createElement('canvas')
