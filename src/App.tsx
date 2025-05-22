@@ -36,10 +36,8 @@ function App() {
       setMessage('Insufficient balance!')
       return
     }
-
     setIsScratching(true)
     setBalance((prev) => parseFloat((prev - 0.1).toFixed(2)))
-
     setTimeout(() => {
       const result = prizes[Math.floor(Math.random() * prizes.length)]
       setMessage(`You won: ${result}`)
