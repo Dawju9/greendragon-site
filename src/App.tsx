@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { ScratchCard } from './scratchcards'
 
 interface ServerInfo {
   name: string
@@ -40,22 +39,6 @@ export default function App() {
     const scratchCardContainer = document.createElement('div')
     scratchCardContainer.className = 'scratch-card-container'
     document.querySelector('#root')?.appendChild(scratchCardContainer)
-
-    const scratchCard = new ScratchCard(scratchCardContainer, {
-      width: 320,
-      height: 160,
-      gridSize: 12,
-      rewards: [0, 0, 0, 5, 10, 20, 50, 100, 500],
-      requiredScratched: 6
-    })
-
-    scratchCardContainer.addEventListener('scratchcard:complete', (event: Event) => {
-      const customEvent = event as CustomEvent
-      setBalance(prev => prev + customEvent.detail.totalWinnings)
-      setTimeout(() => {
-        scratchCard.reset()
-      }, 2000)
-    })
 
     return () => {
       scratchCardContainer.remove()

@@ -3,8 +3,31 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Initialize scratch cards
-import { ScratchCard } from './scratchcards'
+interface ScratchCardOptions {
+  scratchType: string
+  containerWidth: number
+  containerHeight: number
+  imageForwardSrc: string
+  imageBackgroundSrc: string
+  htmlBackground: string
+  brushSrc: string
+  radius: number
+  nPoints: number
+  percent: number
+  onComplete: () => void
+}
+
+class ScratchCard {
+  canvas: HTMLCanvasElement
+  
+  constructor(selector: string, options: ScratchCardOptions) {
+    this.canvas = document.createElement('canvas')
+  }
+
+  init() {
+    return Promise.resolve()
+  }
+}
 
 const initScratchCards = () => {
   const root = document.getElementById('root')
