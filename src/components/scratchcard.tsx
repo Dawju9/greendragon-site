@@ -4,8 +4,6 @@ export const ScratchCard = ({
   width,
   height,
   image,
-  finishPercent,
-  onComplete,
   children,
 }: {
   width: number;
@@ -25,7 +23,7 @@ export const ScratchCard = ({
 export const ScratchCardWrapper = () => {
   return (
     <div>
-      <Scratchcard
+      <ScratchCard
         width={300}
         height={300}
         image="path/to/cover-image.jpg"
@@ -35,7 +33,7 @@ export const ScratchCardWrapper = () => {
         <div style={{ width: "100%", height: "100%", textAlign: "center" }}>
           Your content here
         </div>
-      </Scratchcard>
+      </ScratchCard>
     </div>
   );
 };
