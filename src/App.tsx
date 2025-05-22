@@ -11,14 +11,11 @@ interface ServerInfo {
   map: string
 }
 
-const prizes = ['0.01 ETH', '0.05 ETH', '0.1 ETH', 'Try Again', '0.5 ETH']
-
 function App() {
   const [serverInfo, setServerInfo] = useState<ServerInfo | null>(null)
   const [walletConnected, setWalletConnected] = useState(false)
   const [balance, setBalance] = useState(1.0)
   const [message, setMessage] = useState('')
-  const [isScratching, setIsScratching] = useState(false)
 
   useEffect(() => {
     fetch('http://198.244.231.52:30322/info')
@@ -26,23 +23,32 @@ function App() {
       .then((data) => setServerInfo(data))
   }, [])
 
+  useEffect(() => {
+    const scratchCardContainer = document.createElement('div')
+    scratchCardContainer.className = 'scratch-card-container'
+    document.querySelector('#root')?.appendChild(scratchCardContainer)
+
+    const scratchCard = new ScratchCard(scratchCardContainer, {
+      rewards: [0, 0, 0, 5, 10, 20, 50, 100, 500],
+      requiredScratched: 6
+    })
+
+    scratchCardContainer.addEventListener('scratchcard:complete', (event: Event) => {
+      const customEvent = event as CustomEvent
+      setBalance(prev => prev + customEvent.detail.totalWinnings)
+      setTimeout(() => {
+        scratchCard.reset()
+      }, 2000)
+    })
+
+    return () => {
+      scratchCardContainer.remove()
+    }
+  }, [walletConnected])
+
   const connectWallet = () => {
     setWalletConnected(true)
     setMessage('Wallet connected!')
-  }
-
-  const buyScratchCard = () => {
-    if (balance < 0.1) {
-      setMessage('Insufficient balance!')
-      return
-    }
-    setIsScratching(true)
-    setBalance((prev) => parseFloat((prev - 0.1).toFixed(2)))
-    setTimeout(() => {
-      const result = prizes[Math.floor(Math.random() * prizes.length)]
-      setMessage(`You won: ${result}`)
-      setIsScratching(false)
-    }, 1000)
   }
 
   return (
@@ -75,9 +81,6 @@ function App() {
         ) : (
           <>
             <p>Balance: {balance.toFixed(2)} ETH</p>
-            <button onClick={buyScratchCard} disabled={isScratching}>
-              {isScratching ? 'Scratching...' : 'Buy Scratch Card (0.1 ETH)'}
-            </button>
             <p>{message}</p>
           </>
         )}
