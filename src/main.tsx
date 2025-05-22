@@ -4,6 +4,8 @@ import App from './App.tsx'
 import './index.css'
 
 // Initialize scratch cards
+import { ScratchCard } from './scratchcads'
+
 const initScratchCards = () => {
   const root = document.getElementById('root')
   if (root) {
@@ -24,7 +26,7 @@ const initScratchCards = () => {
     })
 
     scratchCard.init().then(() => {
-      scratchCard.canvas.addEventListener('scratch', () => {
+      scratchCard.canvas.addEventListener('scratch', (event: MouseEvent) => {
         // Handle scratch events
         const scratch = document.createElement('div')
         scratch.className = 'scratch-effect'
@@ -38,7 +40,6 @@ const initScratchCards = () => {
     })
   }
 }
-
 initScratchCards()
 
 createRoot(document.getElementById('root')!).render(
