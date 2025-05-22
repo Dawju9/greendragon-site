@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { ScratchCard } from './main'
 
 interface ServerInfo {
   name: string
@@ -17,10 +18,10 @@ export default function App() {
     const saved = localStorage.getItem('walletConnected')
     return saved ? JSON.parse(saved) : false
   })
-  const balance = useState(() => {
+  const [balance] = useState(() => {
     const saved = localStorage.getItem('balance')
     return saved ? parseFloat(saved) : 1.0
-  })[0]
+  })
 
   useEffect(() => {
     fetch('http://198.244.231.52:30322/info')
@@ -36,12 +37,39 @@ export default function App() {
 
   useEffect(() => {
     fetch('http://198.244.231.52:30322/user')
-    const scratchCardContainer = document.createElement('div')
-    scratchCardContainer.className = 'scratch-card-container'
-    document.querySelector('#root')?.appendChild(scratchCardContainer)
+    if (walletConnected) {
+      const scratchCard = new ScratchCard('#root', {
+        scratchType: 'circle',
+        containerWidth: window.innerWidth,
+        containerHeight: window.innerHeight,
+        imageForwardSrc: '/scratch-overlay.png',
+        imageBackgroundSrc: '/background.png',
+        htmlBackground: '<div class="scratch-bg"></div>',
+        brushSrc: '/brush.png',
+        radius: 20,
+        nPoints: 30,
+        percent: 50,
+        onComplete: () => {
+          console.log('Scratch completed!')
+        }
+      })
+
+      scratchCard.init().then(() => {
+        scratchCard.canvas.addEventListener('mousemove', (event: MouseEvent) => {
+          const scratch = document.createElement('div')
+          scratch.className = 'scratch-effect'
+          const x = event.clientX
+          const y = event.clientY
+          scratch.style.left = `${x}px`
+          scratch.style.top = `${y}px`
+          document.body.appendChild(scratch)
+          setTimeout(() => scratch.remove(), 1000)
+        })
+      })
+    }
 
     return () => {
-      scratchCardContainer.remove()
+      document.querySelector('.scratch-card-container')?.remove()
     }
   }, [walletConnected])
 
