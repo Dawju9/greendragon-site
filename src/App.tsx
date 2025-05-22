@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { ScratchCard } from './scratchcards'
 
 interface ServerInfo {
   name: string
