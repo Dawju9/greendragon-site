@@ -1,3 +1,4 @@
+/* ScratchCards.js styles */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -48,7 +49,7 @@ body {
   color: white;
 }
 
-.card {
+.scratch-card {
   background: #1e1e1e;
   margin: 2rem auto;
   padding: 2rem;
@@ -56,11 +57,25 @@ body {
   width: 90%;
   max-width: 400px;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
-  transition: transform 0.2s;
+  position: relative;
+  cursor: pointer;
 }
 
-.card:active {
-  animation: scratch-effect 0.2s ease-in-out;
+.scratch-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.scratch-content {
+  visibility: hidden;
+}
+
+.scratch-content.revealed {
+  visibility: visible;
 }
 
 .read-the-docs {
@@ -94,24 +109,32 @@ button:disabled {
   transform: none;
 }
 
-.scratch-interaction {
-  position: relative;
-  overflow: hidden;
-}
-
-.scratch-interaction::after {
-  content: '';
+.scratch-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.1);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  border-radius: 12px;
+  cursor: pointer;
 }
 
-.scratch-interaction:active::after {
-  opacity: 1;
+.scratch-percentage {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.scratch-complete {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }

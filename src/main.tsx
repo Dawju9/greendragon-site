@@ -3,24 +3,43 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Create scratch effect interaction
-const initScratchEffect = () => {
+// Initialize scratch cards
+const initScratchCards = () => {
   const root = document.getElementById('root')
   if (root) {
-    root.addEventListener('mousemove', (e) => {
-      const x = e.clientX
-      const y = e.clientY
-      const scratch = document.createElement('div')
-      scratch.className = 'scratch-effect'
-      scratch.style.left = `${x}px`
-      scratch.style.top = `${y}px`
-      document.body.appendChild(scratch)
-      setTimeout(() => scratch.remove(), 1000)
+    const scratchCard = new ScratchCard('#root', {
+      scratchType: 'circle',
+      containerWidth: window.innerWidth,
+      containerHeight: window.innerHeight,
+      imageForwardSrc: '/scratch-overlay.png',
+      imageBackgroundSrc: '/background.png',
+      htmlBackground: '<div class="scratch-bg"></div>',
+      brushSrc: '/brush.png',
+      radius: 20,
+      nPoints: 30,
+      percent: 50,
+      onComplete: () => {
+        console.log('Scratch completed!')
+      }
+    })
+
+    scratchCard.init().then(() => {
+      scratchCard.canvas.addEventListener('scratch', () => {
+        // Handle scratch events
+        const scratch = document.createElement('div')
+        scratch.className = 'scratch-effect'
+        const x = event.clientX
+        const y = event.clientY
+        scratch.style.left = `${x}px`
+        scratch.style.top = `${y}px`
+        document.body.appendChild(scratch)
+        setTimeout(() => scratch.remove(), 1000)
+      })
     })
   }
 }
 
-initScratchEffect()
+initScratchCards()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
