@@ -33,10 +33,39 @@
   }
 }
 
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #121212;
+  color: white;
+}
+
 .card {
-  padding: 2em;
+  background: #1e1e1e;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
 }
 
 .read-the-docs {
   color: #888;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #0af;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:disabled {
+  background-color: #444;
+  cursor: not-allowed;
 }
