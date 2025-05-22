@@ -23,7 +23,7 @@ export default function App() {
   })
 
   useEffect(() => {
-    fetch('http://198.244.231.52:30322/info')
+    fetch('http://:30322/info')
       .then((res) => res.json())
       .then((data) => setServerInfo(data))
   }, [])
