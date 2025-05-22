@@ -26,7 +26,7 @@ export const ScratchCardWrapper = () => {
       <ScratchCard
         width={300}
         height={300}
-        image="path/to/cover-image.jpg"
+        image="../zdrapa.jpg"
         finishPercent={50}
         onComplete={() => console.log("Card scratched")}
       >
