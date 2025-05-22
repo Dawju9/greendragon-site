@@ -4,7 +4,7 @@ import App from './App.tsx'
 import './index.css'
 
 // Initialize scratch cards
-import { ScratchCard } from './scratchcads'
+import { ScratchCard } from './scratchcards'
 
 const initScratchCards = () => {
   const root = document.getElementById('root')
